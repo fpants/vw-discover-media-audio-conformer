@@ -1,4 +1,4 @@
-vw-discover-media-audio-conformer
+VW Discover Media Audio Conformer
 =================================
 
 Small python script that makes audio files conform to playing on the VW Discover Media audio system.
@@ -10,7 +10,7 @@ This script tries to remedy these cases by:
 * removing any hidden files
 * removing special OSX hidden directories such as .Spotlight-V100 and .Trashes
 
-It uses the mutagen audio manipulation and pillow image manipulation python libraries.
+It uses the mutagen audio manipulation and pillow image manipulation python libraries (pip install mutagen Pillow).
 Only files using the mpeg 4 container (m4a) are supported, but mp3 support is possible, as mutagen can handle it.
 
     $ python conformer.py 
