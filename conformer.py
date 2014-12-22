@@ -63,7 +63,7 @@ for dirpath, subdirs, files in os.walk(args.directory):
       if raw_cover:
         image = create_image_from_string(raw_cover)
         if is_image_within_dimensions(image, TARGET_COVER_DIMENSIONS):
-          print "skipping " + filename + " beacuse it is already within target size " + str(TARGET_COVER_DIMENSIONS)
+          print "skipping " + filename + " because it is already within target size " + str(TARGET_COVER_DIMENSIONS)
         else:
           image = resize(image, TARGET_COVER_DIMENSIONS)
           raw_image = create_raw_jpeg(image)
