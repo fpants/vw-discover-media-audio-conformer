@@ -5,8 +5,8 @@ Small python script that makes audio files conform to playing on the VW Discover
 VW Discover Media supports cover art with a max resolution of 400x400 px.
 Also, files starting with a '.' (unix hidden files) are displayed in the song picker.
 
-This script tries to remedy these cases by:
-* resizing the front cover to 400x400 px if it is not already at that size
+This script tries to remedy these cases by traversing a given directory looking for audio files and
+* resizing front covers to 400x400 px if not already at or below that size
 * removing any hidden files
 * removing special OSX hidden directories such as .Spotlight-V100 and .Trashes
 
