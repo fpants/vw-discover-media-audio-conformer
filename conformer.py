@@ -4,7 +4,7 @@ from cStringIO import StringIO
 import os, argparse, shutil
 
 TARGET_COVER_DIMENSIONS = 400, 400
-OSX_SPECIAL_DIRECTORIES = [".Trashes", ".Spotlight-V100", ".fseventsd"]
+OSX_SPECIAL_DIRECTORIES = ".Trashes", ".Spotlight-V100", ".fseventsd"
 
 def read_first_cover(mp4):
   covers = mp4['covr']
@@ -21,8 +21,7 @@ def create_image_from_string(image_data):
   return Image.open(image_buffer)
 
 def is_image_within_dimensions(image, dimensions):
-  if image.size <= dimensions:
-    return True
+  return image.size <= dimensions
 
 def is_mpeg4_audio(filename):
   return filename.endswith(".m4a")
@@ -56,7 +55,7 @@ for dirpath, subdirs, files in os.walk(args.directory):
   for file in files:
     filename = os.path.join(dirpath, file)
     if is_hidden(file) and args.remove_hidden_files:
-      print("removing hidden file " + filename)
+      print "removing hidden file " + filename
       os.remove(filename)
     if is_mpeg4_audio(file):
       mp4 = MP4(filename)
@@ -64,11 +63,11 @@ for dirpath, subdirs, files in os.walk(args.directory):
       if raw_cover:
         image = create_image_from_string(raw_cover)
         if is_image_within_dimensions(image, TARGET_COVER_DIMENSIONS):
-          print("skipping " + filename + " beacuse it is already within target size " + str(TARGET_COVER_DIMENSIONS))
+          print "skipping " + filename + " beacuse it is already within target size " + str(TARGET_COVER_DIMENSIONS)
         else:
           image = resize(image, TARGET_COVER_DIMENSIONS)
           raw_image = create_raw_jpeg(image)
-          print("saving " + filename + " with size " + str(image.size))
+          print "saving " + filename + " with size " + str(image.size)
           save_first_cover(mp4, raw_image)
       else:
         print "no cover found in " + filename
