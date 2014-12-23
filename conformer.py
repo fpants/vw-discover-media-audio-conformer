@@ -7,7 +7,7 @@ TARGET_COVER_DIMENSIONS = 400, 400
 OSX_SPECIAL_DIRECTORIES = ".Trashes", ".Spotlight-V100", ".fseventsd"
 
 def read_first_cover(mp4):
-  covers = mp4['covr']
+  covers = mp4.get('covr', None)
   if covers:
     return covers[0]
 
@@ -54,10 +54,10 @@ if args.remove_osx_special_directories:
 for dirpath, subdirs, files in os.walk(args.directory):
   for file in files:
     filename = os.path.join(dirpath, file)
-    if is_hidden(file) and args.remove_hidden_files:
+    if args.remove_hidden_files and os.path.exists(filename) and is_hidden(file):
       print "removing hidden file " + filename
       os.remove(filename)
-    if is_mpeg4_audio(file):
+    if is_mpeg4_audio(file) and not is_hidden(file):
       mp4 = MP4(filename)
       raw_cover = read_first_cover(mp4)
       if raw_cover:
